@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} {{ title }} {% endblock %}
+
+{% block content%}
+   <div class = "container">
+   	<h1>Thank YOU!</h1>
+   	<br/>
+   	<br/>
+
+   	<p>Your information will now be sold to FACEBOOK, AMAZON, and TESLA.</p>
+
+	<ul>
+	   	{% for subscriber in subscribers%}
+	   		<li> {{ subscriber }}
+	   		</li>
+	   	{% endfor %}
+	</ul>
+   </div>
+
+{% endblock %}

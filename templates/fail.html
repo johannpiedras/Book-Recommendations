@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %} Try Again Please! {% endblock %}
+
+{% block content%}
+   <div class = "container">
+   	<h1>ERROR!</h1>
+
+   	{{ error_statement }}
+   	<br/>
+   	<br/>
+
+   	<form action = "/form" method ="POST">
+
+	  <div class="mb-3">
+	   <!--  <label for="exampleInputEmail1" class="form-label">Email address</label> -->
+	    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+	    placeholder="First Name", name="first_name" value = "{{first_name}}">
+	    <!-- IMPORTANT...
+	    	Having name = first_name means that in the app.py file
+	    	I can now use request.form.get('first_name')
+	    	to retrieve the inputted data.
+	    -->
+	  </div>
+
+	  <div class="mb-3">
+	   <!--  <label for="exampleInputEmail1" class="form-label">Email address</label> -->
+	    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+	    placeholder="Last Name" name="last_name" value = "{{last_name}}">
+	  </div>
+
+	  <div class="mb-3">
+	   <!--  <label for="exampleInputEmail1" class="form-label">Email address</label> -->
+	    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+	    placeholder="Email Address" name = 'email' value="{{ email }}">
+	  </div>
+
+
+	  <button type="submit" class="btn btn-secondary">Submit</button>
+
+	</form>
+
+
+   </div>
+
+{% endblock %}

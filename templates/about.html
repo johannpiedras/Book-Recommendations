@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} About Online Science TA {% endblock %}
+
+{% block content%}
+
+<!-- Everything in between the block will pull out from base file -->
+
+   <!-- Example of using Jinja -->
+
+   <div class = "container">
+   	<h1>About Johann's Online Science Tutor!</h1>
+    <p>
+    <ol>
+      {% for name in names%}
+        {% if name == "Johann" %}
+          <li>Johann is the best!</li>
+        {% else %}
+          <li> {{ name }}</li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+    </p>
+   </div>
+
+{% endblock %}
