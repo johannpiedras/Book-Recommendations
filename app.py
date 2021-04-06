@@ -25,10 +25,18 @@ subscribers = []
 def index(): # {{ url_for('index')}}
 	return render_template('index.html')
 
+@app.route('/answer', methods = ['POST', 'GET'])
+def answer():
+    return render_template('answer.html')
+
+@app.route('/recommendation', methods = ['POST', 'GET'])
+def recommendation():
+    return render_template('recommendation.html')
+
 
 @app.route('/about')
 def about(): # {{ url_for('about')}}
-	names = ["Johann", "Ron", "Loay", "Zarak", "Ava", "Daniel", "Zeb", "Jay", "Jonatas", "Amir"]
+	names = ["Johann", "Ron", "Valery","Loay", "Zarak", "Ava", "Daniel", "Zeb", "Jay", "Jonatas", "Amir"]
 	return render_template('about.html', names = names)
 
 

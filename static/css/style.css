@@ -1,10 +1,27 @@
 h1{
-	color: purple;
+	color: #000000;
 	font-size : 60 px;
 }
 
 
 body{
-	color: white;
-	background: lightseagreen;
+	color: #000000;
+	background: #F1F1F1;
 }
+
+h3.text-center{
+  color: #5B4349
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+    border: 2px solid yellow;
+}
+
+.flex-child:first-child {
+    margin-right: 20px;
+} 

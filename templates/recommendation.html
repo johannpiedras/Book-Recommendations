@@ -11,12 +11,6 @@
    </div>`
    <!-- END Logo image -->
 
-   <div class = "home-text">
-     <h3 class="text-center">Welcome to R and J's Bookstore.</h3>
-     <p class="text-center">Please enter book and author name to check if we have the book available.</p>
-   </div>`
-
-
    <!-- START Input Section -->
    <div class="container">
      <form action="/answer" method="POST">
@@ -30,5 +24,31 @@
      </form>
     </div>
    <!-- END Input Section -->
+
+   <div class = "home-text">
+     <h3 class="text-center">Our bookstore recommendations!</h3>
+     <p class="text-center">Visit our bookstore to find these recommendations</p>
+   </div>
+
+
+   <!-- START table Section -->
+
+   <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+   <div class="container" style="display: flex; height: 100px;">
+       <div style="width: 30%; background: green;">
+           Left Div
+       </div>
+
+       <div style="flex-grow: 1; background: blue;">
+           Right Div
+       </div>
+   </div>
+   <!-- START table Section -->
+
+
+   <!-- Start button Section -->
+
+   <!-- END button Section -->
+
 
 {% endblock %}

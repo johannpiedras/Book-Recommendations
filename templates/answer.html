@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %} R and J's Bookstore {% endblock %}
+
+{% block content%}
+
+
+   <!-- START Logo image -->
+   <div class = "container">
+     <img src="{{ url_for('static', filename = 'images/logo_500x500.png')}}" class="rounded mx-auto d-block" alt="...">
+   </div>`
+   <!-- END Logo image -->
+
+   <div class = "home-text">
+     <h3 class="text-center">Is the book of interested listed below?</h3>
+     <p class="text-center">Please check the appropiate box</p>
+   </div>
+
+
+   <!-- START table Section -->
+   <div class = "container">
+   <form>
+   <table class="table table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>
+                    <div class="radio">
+                        <label><input type="radio" name='selected_book' id='selected_book' value="0441102670"> 0441102670</label>
+                    </div>
+                </td>
+                <td>
+                <div class="radiotext">
+                    <label for='selected_book'>Dune</label>
+                </div>
+                </td>
+                <td>
+                <div class="radiotext">
+                    <label for='selected_book'>Frank Herbert</label>
+                </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="radio">
+                        <label><input type="radio" name='book_not_found' id='book_not_found' value="notfound"> My book is note listed</label>
+                    </div>
+                </td>
+                <td>
+                <div class="radiotext">
+                    <label for='selected_book'>INPUTTED BOOK TITLE</label>
+                </div>
+                </td>
+                <td>
+                <div class="radiotext">
+                    <label for='selected_book'> INPUTTED BOOK AUTHOR</label>
+                </div>
+                </td>
+            </tr>
+
+
+            </tbody>
+
+   </table>
+   <!-- Start button Section -->
+   <button type="submit" class="btn btn-outline-dark btn-bloc"> Submit </button>
+   <!-- END button Section -->
+   </form>
+   </div>
+   <!-- END table Section -->
+
+   <!-- Start button Section -->
+
+   <!-- END button Section -->
+
+
+{% endblock %}
