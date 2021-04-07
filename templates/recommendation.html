@@ -5,6 +5,13 @@
 {% block content%}
 
 
+
+<script>
+  $('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })
+</script>
+
    <!-- START Logo image -->
    <div class = "container">
      <img src="{{ url_for('static', filename = 'images/logo_500x500.png')}}" class="rounded mx-auto d-block" alt="...">
@@ -31,21 +38,129 @@
    </div>
 
 
-   <!-- START table Section -->
+     <!-- START table Section -->
 
-   <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-   <div class="container" style="display: flex; height: 100px;">
+     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+   <div class="container" style="display: flex; height: 300px;">
        <div style="width: 30%; background: green;">
-           Left Div
+           <img src="{{ url_for('static', filename = 'images/sample_cover.png')}}" class="rounded mx-auto d-block" alt="...">
        </div>
+            <!-- Right hand side of DIV-->
+     <div style="flex-grow: 1; ">
+          <table class="table table-responsive table-hover">
+            <thead>
+              <tr>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Author</th>
+              </tr>
+            </thead>
 
-       <div style="flex-grow: 1; background: blue;">
-           Right Div
-       </div>
+            <tbody>
+              <tr>
+                <td>0441102670</td>
+                <td>Dune</td>
+                <td>Frank Herbert</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>Descriptions<p>
+          <p class="lead">
+          Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.
+          </p>
+
+        </div>
    </div>
    <!-- START table Section -->
+    <br>
+    <br>
+   <div class="row">
+     <div class="col-sm-4">
+       <div class="card text-center border-dark mb-3">
+         <br>
+         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
+         <div class="card-body">
+           <h5 class="card-title">Special title treatment</h5>
+           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+           <a href="#" class="btn btn-outline-dark""> More Info</a>
+           <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+             Popover on top
+           </button>
+         </div>
+       </div>
+     </div>
 
+     <div class="col-sm-4">
+       <div class="card text-center border-dark mb-3">
+         <br>
+         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
+         <div class="card-body">
+           <h5 class="card-title">Special title treatment</h5>
+           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+           <a href="#" class="btn btn-outline-dark""> More Info</a>
+           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
+         </div>
+       </div>
+     </div>
 
+     <div class="col-sm-4">
+       <div class="card text-center border-dark mb-3">
+         <br>
+         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
+         <div class="card-body">
+           <h5 class="card-title">Special title treatment</h5>
+           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+           <a href="#" class="btn btn-outline-dark""> More Info</a>
+           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <br>
+   <br>
+
+   <div class="row">
+     <div class="col-sm-4">
+       <div class="card text-center border-dark mb-3">
+         <br>
+         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
+         <div class="card-body">
+           <h5 class="card-title">Special title treatment</h5>
+           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+           <a href="#" class="btn btn-outline-dark""> More Info</a>
+           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
+         </div>
+       </div>
+     </div>
+
+     <div class="col-sm-4">
+       <div class="card text-center border-dark mb-3">
+         <br>
+         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
+         <div class="card-body">
+           <h5 class="card-title">Special title treatment</h5>
+           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+           <a href="#" class="btn btn-outline-dark""> More Info</a>
+           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
+         </div>
+       </div>
+     </div>
+
+     <div class="col-sm-4">
+       <div class="card text-center border-dark mb-3">
+         <br>
+         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
+         <div class="card-body">
+           <h5 class="card-title">Special title treatment</h5>
+           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+           <a href="#" class="btn btn-outline-dark""> More Info</a>
+           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
+         </div>
+       </div>
+     </div>
+   </div>
    <!-- Start button Section -->
 
    <!-- END button Section -->
