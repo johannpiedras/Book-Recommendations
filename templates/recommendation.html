@@ -4,18 +4,12 @@
 
 {% block content%}
 
-
-
-<script>
-  $('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-  })
-</script>
+  <script src="{{url_for('static', filename='js/recommendation_popover.js')}}"> </script>
 
    <!-- START Logo image -->
    <div class = "container">
      <img src="{{ url_for('static', filename = 'images/logo_500x500.png')}}" class="rounded mx-auto d-block" alt="...">
-   </div>`
+   </div>
    <!-- END Logo image -->
 
    <!-- START Input Section -->
@@ -70,6 +64,12 @@
           Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.
           </p>
 
+          <!-- STARTN TESTING STUFF  -->
+
+          <!-- STARTN TESTING STUFF  -->
+
+
+
         </div>
    </div>
    <!-- START table Section -->
@@ -84,9 +84,7 @@
            <h5 class="card-title">Special title treatment</h5>
            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
            <a href="#" class="btn btn-outline-dark""> More Info</a>
-           <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-             Popover on top
-           </button>
+           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
          </div>
        </div>
      </div>

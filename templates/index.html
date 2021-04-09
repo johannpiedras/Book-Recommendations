@@ -4,7 +4,6 @@
 
 {% block content%}
 
-
    <!-- START Logo image -->
    <div class = "container">
      <img src="{{ url_for('static', filename = 'images/logo_500x500.png')}}" class="rounded mx-auto d-block" alt="...">
@@ -16,19 +15,19 @@
      <p class="text-center">Please enter book and author name to check if we have the book available.</p>
    </div>`
 
-
+   <!-- when we fill uout a form we are posting, when we are going to a webpage we are getting a page -->
    <!-- START Input Section -->
-   <div class="container">
-     <form action="/answer" method="POST">
-
-     <div class="input-group mb-3">
-       <input type="text" class="form-control" placeholder="Book and Author Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
-       <div class="input-group-append">
-         <button class="btn btn-outline-secondary" type="button" value="Search For Answer">Search</button>
-       </div>
-     </div>
-     </form>
-    </div>
+  <div class="container">
+    <form action="/answer" method="POST">
+      <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Enter book and author name" name ="initial_book">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit" value="Search For Answer">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
    <!-- END Input Section -->
-
+<br>
+<br>
 {% endblock %}
