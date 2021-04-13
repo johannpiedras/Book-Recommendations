@@ -21,55 +21,60 @@
    <div class = "container">
    <form>
    <table class="table table-responsive table-hover">
-        <thead>
-            <tr>
-                <th>ISBN</th>
-                <th>Title</th>
-                <th>Author</th>
+    <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author</th>
+        </tr>
+    </thead>
+      <tbody>
+        {% for item in titles %}
+          <tr>
+              <td>
+                <div class="radio">
+                  <label>
+                  <input type="radio" name='selected_book' id='selected_book' value="0441102670">
+                  {{ item.ISBN }}
+                  </label>
+              </td>
+
+              <td>
+                <div class = 'radiotext'>
+                  <label for='selected_book'>{{ item.title }}
+                  </label>
+              </td>
+
+              <td>
+                <div class = 'radiotext'>
+                  <!-- might have to call like the_indices
+                  item['isbn']
+                  -->
+                  <label for='selected_book'>{{ item.author }}
+                  </label>
+              </td>
             </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>
-                    <div class="radio">
-                        <label><input type="radio" name='selected_book' id='selected_book' value="0441102670"> 0441102670</label>
-                    </div>
-                </td>
-                <td>
-                <div class="radiotext">
-                    <label for='selected_book'>Dune</label>
-                </div>
-                </td>
-                <td>
-                <div class="radiotext">
-                    <label for='selected_book'>Frank Herbert</label>
-                </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div class="radio">
-                        <label><input type="radio" name='book_not_found' id='book_not_found' value="notfound"> My book is note listed</label>
-                    </div>
-                </td>
-                <td>
-                <div class="radiotext">
-                    <label for='selected_book'>INPUTTED BOOK TITLE</label>
-                </div>
-                </td>
-                <td>
-                <div class="radiotext">
-                    <label for='selected_book'> INPUTTED BOOK AUTHOR</label>
-                </div>
-                </td>
-            </tr>
-
-
-            </tbody>
-
+        {% endfor %}
+          <tr>
+              <td>
+                  <div class="radio">
+                      <label><input type="radio" name='book_not_found' id='book_not_found' value="notfound"> My book is note listed</label>
+                  </div>
+              </td>
+              <td>
+              <div class="radiotext">
+                  <label for='selected_book'>INPUTTED BOOK TITLE</label>
+              </div>
+              </td>
+              <td>
+              <div class="radiotext">
+                  <label for='selected_book'> INPUTTED BOOK AUTHOR</label>
+              </div>
+              </td>
+          </tr>
+      </tbody>
    </table>
+
    <!-- Start button Section -->
    <button type="submit" class="btn btn-outline-dark btn-bloc"> Submit </button>
    <!-- END button Section -->
