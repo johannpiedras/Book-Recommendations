@@ -68,10 +68,12 @@ model.train(ta_docs,
            total_examples=model.corpus_count,
            epochs=model.epochs)
 
+
 ta2vec = [model.infer_vector((df['Title and Author'][i].split(' ')))
            for i in range(0, len(df['Title and Author']))]
 
-
+gensim_ta = np.array(ta2vec).tolist()
+df['ta2vec'] = gensim_ta
 
 
 
@@ -94,17 +96,20 @@ def index():
 def answer():
 	if request.method == "POST":
 		###
-		###
 		inp = request.form.get('initial_book')
+		test = inp
 		##
 		##
 
 		new_title = pd.DataFrame([inp])
+
 		title_example = [model.infer_vector((new_title.iloc[0][0].split(' ')))]
 		gensim_example = np.array(title_example).tolist()
 
 		closest = np.zeros((len(df['ta2vec']), 2))
 
+# doing this because the dataframe was sorted
+# This was done to maintain the original order
 		for i in range(len(df['ta2vec'])):
 			closest[i, 0] = i
 			closest[i, 1] = cos_sim(gensim_example[0], df['ta2vec'].iloc[i])
@@ -125,14 +130,27 @@ def answer():
 			'author': df['authors'].iloc[the_indices[i]].encode('utf-8')
 			}
 			titles.append(dictionary)
-		return render_template('answer.html', titles = titles )
+		return render_template('answer.html', titles = titles, test = test )
 	return render_template('answer.html', titles = titles )
 
 
 
 @app.route('/recommendation', methods = ['POST', 'GET'])
 def recommendation():
-    return render_template('recommendation.html')
+	if request.method == "POST":
+		inp = request.form.get('selected_book')
+
+		return render_template('recommendation.html')
+
+# inp is the isbn13 number.... we should be able to use that to retrieve
+# title
+# author
+# description
+# get the image of the bookstore
+
+# then we need to make a list with 6 index of the recommendations
+
+	return render_template('recommendation.html')
 
 
 @app.route('/about')

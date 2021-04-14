@@ -14,12 +14,13 @@
    <div class = "home-text">
      <h3 class="text-center">Is the book of interested listed below?</h3>
      <p class="text-center">Please check the appropiate box</p>
+     <p class="text-center">{{ test }}</p>
    </div>
 
 
    <!-- START table Section -->
    <div class = "container">
-   <form>
+   <form action="/recommendation" method="POST">
    <table class="table table-responsive table-hover">
     <thead>
         <tr>
@@ -34,8 +35,8 @@
               <td>
                 <div class="radio">
                   <label>
-                  <input type="radio" name='selected_book' id='selected_book' value="0441102670">
-                  {{ item.ISBN }}
+                  <input type="radio" name='selected_book' id='selected_book' value='{{ item.isbn }}' >
+                  {{ item.isbn }}
                   </label>
               </td>
 
