@@ -8,19 +8,71 @@
 
    <!-- Example of using Jinja -->
 
-   <div class = "container">
-   	<h1>About Johann's Online Science Tutor!</h1>
-    <p>
-    <ol>
-      {% for name in names%}
-        {% if name == "Johann" %}
-          <li>Johann is the best!</li>
-        {% else %}
-          <li> {{ name }}</li>
-        {% endif %}
-      {% endfor %}
-    </ol>
-    </p>
+
+    <h3 class="text-center">R & J's
+  <small class="text-muted">Bookstore</small>
+</h3>
+<div class = "container">
+  <div class="text-center">
+    R and J bookstore is a virtual bookstore developed by Ron Wilson and Johann Piedras.
+    The idea behind opening our bookstore came from our interest in reading and building recommendation systems.
+  </div>
+
+  <div class="text-left">
+    <br>
+    <strong>The Beginning</strong>
+    <br>
+    We understood that we wanted to create a content-based recommendation system, but didn’t know for what products. As we bounced ideas, there laid a copy of Children of Dune on the table between us. At that moment, time froze for Ron and he felt eureka. BOOKS!
+    We scavenged the interwebs for datasets about books until we found a useful resource in GoodReads.com.
+    They had a dataset available with over 6,000 books, which included information on the author, genre, page count, and more. The dataset was now our virtual bookstore.
+    Alongside the dataset, we also found two useful APIs to further collect information on books. The Open Library API  by the Internet Archive and isbnlib were used to collect descriptions, genres, and book covers.
+
+
+  </div>
+
+<div class="text-left">
+  <br>
+  <strong>The Data Science</strong>
+  <br>
+  We used various NLP techniques to run different models for recommendations. Techniques that we implemented include TF-IDF, Doc2Vec, K-Means Clustering, Universal Encoder, and various combinations of data imputation.  After testing all the models, we selected the best one which would be used with our cosine similarity function to determine the books we recommend. We also used NLP to identify the potential typos that a user provides when using our recommendation system.
+</div>
+
+<div class="text-left">
+  <br>
+  <strong>The Development</strong>
+  <br>
+  To build the virtual bookstore we utilized Python 3.8, Flask 1.1.2 , Jinja 2.11, HTML5, CSS, Bootstrap, Javascript, GIT, Bash, GCP, Atom, and of course The Tensorflow 2.4.1.
+</div>
+   </div>
+<br>
+<br>
+
+   <div class="container overflow-hidden">
+     <div class="row gx-5">
+       <div class="col">
+         <figure class="text-center">
+           <blockquote class="blockquote">
+             <p>"why?"</p>
+           </blockquote>
+           <figcaption class="blockquote-footer">
+             Someone famous named <cite title="Source Title">Ron Wilson</cite>
+           </figcaption>
+         </figure>
+
+       </div>
+       <div class="col">
+         <figure class="text-center">
+           <blockquote class="blockquote">
+             <p>"..."</p>
+           </blockquote>
+           <figcaption class="blockquote-footer">
+             Someone famous named <cite title="Source Title">Johann Piedras</cite>
+           </figcaption>
+         </figure>
+
+
+       </div>
+     </div>
    </div>
 
 {% endblock %}

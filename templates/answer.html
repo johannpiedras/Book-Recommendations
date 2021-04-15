@@ -56,23 +56,6 @@
               </td>
             </tr>
         {% endfor %}
-          <tr>
-              <td>
-                  <div class="radio">
-                      <label><input type="radio" name='book_not_found' id='book_not_found' value="notfound"> My book is note listed</label>
-                  </div>
-              </td>
-              <td>
-              <div class="radiotext">
-                  <label for='selected_book'>INPUTTED BOOK TITLE</label>
-              </div>
-              </td>
-              <td>
-              <div class="radiotext">
-                  <label for='selected_book'> INPUTTED BOOK AUTHOR</label>
-              </div>
-              </td>
-          </tr>
       </tbody>
    </table>
 
@@ -83,8 +66,26 @@
    </div>
    <!-- END table Section -->
 
-   <!-- Start button Section -->
 
+
+   <!-- Start button Section -->
+   <div class = "home-text">
+     <h3 class="text-center">Didn't find your book?</h3>
+     <p class="text-center">This book must not be in our store. Please try again with a new book below!</p>
+   </div>`
+
+   <!-- when we fill uout a form we are posting, when we are going to a webpage we are getting a page -->
+   <!-- START Input Section -->
+  <div class="container">
+    <form action="/answer" method="POST">
+      <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Enter book and author name" name ="initial_book">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit" value="Search For Answer">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
    <!-- END button Section -->
 
 

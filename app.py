@@ -23,10 +23,17 @@ from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
+import tensorflow_hub as hub
 
 from functions import *
 
 ###    Loading model and data
+# Defining embedder
+module_url = "https://tfhub.dev/google/universal-sentence-encoder/4"
+model = hub.load(module_url)
+
+def embed(input):
+  return model(input)
 
 # Final DataFrame (For EDA & Topic Modeling, Refer to Personal Notebook)
 df = pd.read_csv('Our_Dataset.csv')
@@ -44,36 +51,26 @@ df3.index = df.isbn13
 
 # model = Doc2Vec.load('my_doc2vec_model.bin')
 
-# Creating a custom pipeline for text cleaning
-custom_pipeline = [preprocessing.fillna,
-                   preprocessing.remove_whitespace,
-                   preprocessing.remove_diacritics
-                  ]
-# TextHERO! Pre-Processing
-ta = hero.clean(df['Title and Author'], custom_pipeline)
+useless_list = embed(df['Title and Author'])
+usefull_list = useless_list.numpy()
 
-ta = [n.replace('{','') for n in ta]
-ta = [n.replace('}','') for n in ta]
-ta = [n.replace('(','') for n in ta]
-ta = [n.replace(')','') for n in ta]
+m, n = usefull_list.shape
+complete_list = []
 
-ta_docs = [TaggedDocument(doc.split(' '), [i])
-            for i, doc in enumerate(ta)]
+for i in range(m):
+  temp = []
+  for j in range(n):
+    temp.append(usefull_list[i, j])
+  complete_list.append(temp)
 
-# Building a model to get the embeddings of book titles
-model = Doc2Vec(vector_size = 64, window = 2, min_count = 1, workers = 8, epochs = 40)
-model.build_vocab(ta_docs)
-
-model.train(ta_docs,
-           total_examples=model.corpus_count,
-           epochs=model.epochs)
+empty_df = df.card2vec
+for i in range(len(empty_df)):
+  empty_df.iloc[i] = complete_list[i]
 
 
-ta2vec = [model.infer_vector((df['Title and Author'][i].split(' ')))
-           for i in range(0, len(df['Title and Author']))]
 
-gensim_ta = np.array(ta2vec).tolist()
-df['ta2vec'] = gensim_ta
+
+
 
 
 
@@ -97,22 +94,20 @@ def answer():
 	if request.method == "POST":
 		###
 		inp = request.form.get('initial_book')
-		test = inp
 		##
 		##
+		example = [inp]
+		embedded_example = embed(example)
+		usefull_example = embedded_example.numpy()
+		closest = np.zeros((len(usefull_list), 2))
+		for i in range(len(usefull_list)):
+		  closest[i, 0] = i
+		  closest[i, 1] = cos_sim(usefull_example[0], empty_df.iloc[i])
 
-		new_title = pd.DataFrame([inp])
-
-		title_example = [model.infer_vector((new_title.iloc[0][0].split(' ')))]
-		gensim_example = np.array(title_example).tolist()
-
-		closest = np.zeros((len(df['ta2vec']), 2))
 
 # doing this because the dataframe was sorted
 # This was done to maintain the original order
-		for i in range(len(df['ta2vec'])):
-			closest[i, 0] = i
-			closest[i, 1] = cos_sim(gensim_example[0], df['ta2vec'].iloc[i])
+
 
 		df_closest = pd.DataFrame(closest)
 		df_closest.columns = ['index', 'cos_sim']
@@ -126,11 +121,11 @@ def answer():
 		for i in range(len(the_indices)):
 			dictionary = {
 			'isbn': df['isbn13'].iloc[the_indices[i]],
-			'title': df['title'].iloc[the_indices[i]].encode('utf-8'),
-			'author': df['authors'].iloc[the_indices[i]].encode('utf-8')
+			'title': df['title'].iloc[the_indices[i]],
+			'author': df['authors'].iloc[the_indices[i]]
 			}
 			titles.append(dictionary)
-		return render_template('answer.html', titles = titles, test = test )
+		return render_template('answer.html', titles = titles )
 	return render_template('answer.html', titles = titles )
 
 
@@ -139,8 +134,44 @@ def answer():
 def recommendation():
 	if request.method == "POST":
 		inp = request.form.get('selected_book')
+		recommendation_title = df.title[df.isbn13 == int(inp)].iloc[0]
+		recommendation_author = df.authors[df.isbn13 == int(inp)].iloc[0]
+		recommendation_description = df.clean_text[df.isbn13 == int(inp)].iloc[0]
+		useless_cover = cover(inp)
+		recommendation_cover = useless_cover.get('thumbnail')# this is a link
+# Recommendation Function
+		theta = df3[inp].sort_values(ascending = False)
 
-		return render_template('recommendation.html')
+		useless_recommendation = []
+		for i in range(6):
+			johann = theta.index[i]
+			temp_cover = cover(str(johann))
+			temp = df.clean_text[df.isbn13 == johann].iloc[0]
+			thresh = 150
+			if len(temp) > thresh:
+				temp = temp[:thresh] + '...'
+
+			temp2 = df.title[df.isbn13 == johann].iloc[0]
+			thresh2 = 66
+			if len(temp2) >= thresh2:
+				temp2 = temp2[:thresh2] + '...'
+			recommendation = {
+			'isbn': johann,
+			'title': temp2,
+			'author': df.authors[df.isbn13 == johann].iloc[0],
+			'description': temp,
+			'cover': temp_cover.get('thumbnail')
+			}
+			useless_recommendation.append(recommendation)
+
+		return render_template('recommendation.html',
+			recommendation_title= recommendation_title,
+			recommendation_cover = recommendation_cover,
+			recommendation_author = recommendation_author,
+			recommendation_description = recommendation_description,
+			book = inp,
+			useless_recommendation = useless_recommendation
+		)
 
 # inp is the isbn13 number.... we should be able to use that to retrieve
 # title
@@ -173,13 +204,11 @@ def form(): # {{ url_for('index')}}
 	my_email = 'johannpiedras.email@gmail.com'
 	my_password = 'testingEMAIL1995'
 
-	message = "You have been contacted Online Science Tutor bu Johann Piedras. Thank you!"
+	message = "Thanks for messaging Ron and Johann's bookstore. Thank you!"
 	server = smtplib.SMTP("smtp.gmail.com" , 587)
 	server.starttls()
 	server.login(my_email, my_password)
 	server.sendmail(my_email, EMAIL, message)
-	# my_email has my email
-	# EMAIL is what was given by the user
 
 	if not firstNAME or not lastNAME or not EMAIL:
 		error_statement = "All form fields required please. Dont be SNEAKY"

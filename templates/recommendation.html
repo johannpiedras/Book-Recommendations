@@ -35,9 +35,9 @@
      <!-- START table Section -->
 
      <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-   <div class="container" style="display: flex; height: 300px;">
-       <div style="width: 30%; background: green;">
-           <img src="{{ url_for('static', filename = 'images/sample_cover.png')}}" class="rounded mx-auto d-block" alt="...">
+   <div class="container" style="display: flex;">
+       <div class = 'align-middle' style="width: 30%">
+           <img src="{{ recommendation_cover }}" class="rounded mx-auto d-block" alt="...">
        </div>
             <!-- Right hand side of DIV-->
      <div style="flex-grow: 1; ">
@@ -52,17 +52,15 @@
 
             <tbody>
               <tr>
-                <td>0441102670</td>
-                <td>Dune</td>
-                <td>Frank Herbert</td>
+                <td>{{ book }}</td>
+                <td>{{ recommendation_title}}</td>
+                <td>{{ recommendation_author}}</td>
               </tr>
             </tbody>
           </table>
 
           <p>Descriptions<p>
-          <p class="lead">
-          Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.
-          </p>
+          <p class="lead"> {{ recommendation_description}}</p>
 
           <!-- STARTN TESTING STUFF  -->
 
@@ -72,93 +70,52 @@
 
         </div>
    </div>
+
+
+
+
    <!-- START table Section -->
-    <br>
-    <br>
-   <div class="row">
-     <div class="col-sm-4">
-       <div class="card text-center border-dark mb-3">
-         <br>
-         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
-         <div class="card-body">
-           <h5 class="card-title">Special title treatment</h5>
-           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-           <a href="#" class="btn btn-outline-dark""> More Info</a>
-           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
-         </div>
-       </div>
-     </div>
-
-     <div class="col-sm-4">
-       <div class="card text-center border-dark mb-3">
-         <br>
-         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
-         <div class="card-body">
-           <h5 class="card-title">Special title treatment</h5>
-           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-           <a href="#" class="btn btn-outline-dark""> More Info</a>
-           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
-         </div>
-       </div>
-     </div>
-
-     <div class="col-sm-4">
-       <div class="card text-center border-dark mb-3">
-         <br>
-         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
-         <div class="card-body">
-           <h5 class="card-title">Special title treatment</h5>
-           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-           <a href="#" class="btn btn-outline-dark""> More Info</a>
-           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
-         </div>
-       </div>
-     </div>
-   </div>
-
    <br>
    <br>
 
-   <div class="row">
-     <div class="col-sm-4">
-       <div class="card text-center border-dark mb-3">
+   <form action="/recommendation" method="POST">
+   <div class="row" style="margin-right: 10px; margin-left:10px;">
+     {% for item in useless_recommendation %}
+     <div class="col-lg-4" style="margin-bottom:15px;">
+       <div class="card text-center border-dark">
          <br>
-         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
-         <div class="card-body">
-           <h5 class="card-title">Special title treatment</h5>
-           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-           <a href="#" class="btn btn-outline-dark""> More Info</a>
-           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
-         </div>
-       </div>
-     </div>
+         <!--
 
-     <div class="col-sm-4">
-       <div class="card text-center border-dark mb-3">
-         <br>
-         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
-         <div class="card-body">
-           <h5 class="card-title">Special title treatment</h5>
-           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-           <a href="#" class="btn btn-outline-dark""> More Info</a>
-           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
-         </div>
-       </div>
-     </div>
 
-     <div class="col-sm-4">
-       <div class="card text-center border-dark mb-3">
-         <br>
-         <img class="rounded mx-auto d-block" src="{{ url_for('static', filename = 'images/content.jpg')}}" alt="Card image cap">
+                                ADD A DEFAULT image
+
+                                I KNOW YOU SEE This
+
+                                DO IT!
+
+         -->
+         <img class="rounded mx-auto d-block" src="{{ item.cover }}" alt="Card image cap">
          <div class="card-body">
-           <h5 class="card-title">Special title treatment</h5>
-           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-           <a href="#" class="btn btn-outline-dark""> More Info</a>
-           <a href="#" class="btn btn-outline-dark"">Recommendations</a>
-         </div>
+           <h5 class="card-title">{{ item.title }}</h5>
+           <p font-weight:bold;> {{ item.author }}</p>
+           <p class="card-text"> {{ item.description }}</p>
+           <input type="radio" name='selected_book' id='selected_book' value='{{ item.isbn }}' >
+           {{ item.isbn }}
+           </label>
+           <br>
+           <button type="submit" class="btn btn-outline-dark btn-bloc"> Submit </button>
        </div>
+
      </div>
    </div>
+        {% endfor %}
+  </div>
+  </form>
+
+
+
+
+
    <!-- Start button Section -->
 
    <!-- END button Section -->
